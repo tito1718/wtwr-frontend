@@ -125,6 +125,32 @@
   transform: scale(1.1);
 }
 
+.header__auth-btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  color: #000;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  cursor: pointer;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.header__auth-btn:hover {
+  opacity: 0.6;
+  transform: translateY(-1px);
+}
+
+.header__auth-btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 @media screen and (max-width: 768px) {
   .header {
     padding-bottom: 32px;
@@ -232,5 +258,15 @@
 
   .toggle-switch {
     order: 3;
+  }
+
+  .header__auth-btn {
+    margin: 0 0 16px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .header__auth-btn:last-of-type {
+    margin-bottom: 20px;
   }
 }
