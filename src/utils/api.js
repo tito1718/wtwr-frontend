@@ -1,8 +1,7 @@
 import { getToken } from "./token";
 
-const baseUrl = import.meta.env.PROD
-  ? "https://api.tito-wtwr.crabdance.com"
-  : "http://localhost:3001";
+export const baseUrl =
+  import.meta.env.VITE_MAIN_API_URL || "http://localhost:3001";
 
 export const checkResponse = (res) => {
   if (res.ok) {

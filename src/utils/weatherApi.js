@@ -1,9 +1,11 @@
-import { checkResponse } from "./api";
+import { checkResponse, baseUrl } from "./api";
 
-export const getWeather = ({ latitude, longitude }, apiKey) => {
-  return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`,
-  ).then(checkResponse);
+export const getWeather = ({ latitude, longitude }) => {
+  const parameters = new URLSearchParams({ latitude, longitude });
+
+  return fetch(`${baseUrl}/weather?${parameters.toString()}`).then(
+    checkResponse,
+  );
 };
 
 export const filterWeatherData = (data) => {

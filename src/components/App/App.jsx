@@ -11,7 +11,7 @@ import {
 } from "../../utils/api";
 import { signup, signin, checkToken } from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
-import { apiKey, coordinates } from "../../utils/constants";
+import { coordinates } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
@@ -297,7 +297,7 @@ function App() {
 
   useEffect(() => {
     const fetchWeather = (selectedCoordinates) => {
-      getWeather(selectedCoordinates, apiKey)
+      getWeather(selectedCoordinates)
         .then((data) => {
           const filteredData = filterWeatherData(data);
           setWeatherData(filteredData);

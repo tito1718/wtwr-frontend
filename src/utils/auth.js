@@ -1,8 +1,7 @@
 import { checkResponse } from "./api";
 
-const baseUrl = import.meta.env.PROD
-  ? "https://api.tito-wtwr.crabdance.com"
-  : "http://localhost:3001";
+const baseUrl =
+  import.meta.env.VITE_MAIN_API_URL || "http://localhost:3001";
 
 export const signup = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {
