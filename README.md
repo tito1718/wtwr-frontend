@@ -4,7 +4,7 @@ WTWR (What to Wear?) is a responsive full-stack application that recommends clot
 
 ## Project links
 
-- **Live application:** [Open WTWR](https://wtwr.ldtp.com)
+- **Live application:** [Open WTWR](https://whattowear.ldtp.com)
 - **Frontend repository:** [wtwr-frontend](https://github.com/tito1718/wtwr-frontend)
 - **Backend repository:** [wtwr-backend](https://github.com/tito1718/wtwr-backend)
 - **Backend API:** [WTWR API](https://api.tito-wtwr.crabdance.com)
