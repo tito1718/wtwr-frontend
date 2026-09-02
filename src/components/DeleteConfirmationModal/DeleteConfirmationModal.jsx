@@ -7,6 +7,10 @@ function DeleteConfirmationModal({
   onConfirm,
   isLoading,
   serverError,
+  title = "Are you sure you want to delete this item?",
+  description = "This action is irreversible.",
+  confirmText = "Yes, delete item",
+  loadingText = "Deleting...",
 }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`} onClick={onClose}>
@@ -25,9 +29,9 @@ function DeleteConfirmationModal({
         </button>
 
         <p className="delete-modal__text">
-          Are you sure you want to delete this item?
+          {title}
           <br />
-          This action is irreversible.
+          {description}
         </p>
 
         {serverError && (
@@ -42,7 +46,7 @@ function DeleteConfirmationModal({
           onClick={onConfirm}
           disabled={isLoading}
         >
-          {isLoading ? "Deleting..." : "Yes, delete item"}
+          {isLoading ? loadingText : confirmText}
         </button>
 
         <button

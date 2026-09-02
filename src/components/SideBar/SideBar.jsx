@@ -2,7 +2,11 @@ import { useContext } from "react";
 import "./SideBar.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function SideBar({ handleEditProfileClick, handleSignOut }) {
+function SideBar({
+  handleEditProfileClick,
+  handleSignOut,
+  handleDeleteAccountClick,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -28,6 +32,14 @@ function SideBar({ handleEditProfileClick, handleSignOut }) {
           onClick={handleSignOut}
         >
           Log out
+        </button>
+
+        <button
+          type="button"
+          className="sidebar__button sidebar__button_type_delete"
+          onClick={handleDeleteAccountClick}
+        >
+          Delete account
         </button>
       </div>
     </section>

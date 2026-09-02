@@ -72,3 +72,9 @@
     align-items: center;
   }
 }
+
+
+.sidebar__button_type_delete {
+  margin-top: 8px;
+  color: #ff4d00;
+}

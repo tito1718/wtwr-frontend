@@ -9,6 +9,7 @@ function Profile({
   handleAddClick,
   handleEditProfileClick,
   handleSignOut,
+  handleDeleteAccountClick,
   isLoggedIn,
 }) {
   return (
@@ -16,6 +17,7 @@ function Profile({
       <SideBar
         handleEditProfileClick={handleEditProfileClick}
         handleSignOut={handleSignOut}
+        handleDeleteAccountClick={handleDeleteAccountClick}
       />
 
       <ClothesSection

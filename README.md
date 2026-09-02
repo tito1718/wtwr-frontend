@@ -21,6 +21,7 @@ WTWR (What to Wear?) is a responsive full-stack application that recommends clot
 - Add and delete owned clothing items
 - Like and unlike clothing items
 - Profile name and avatar editing
+- Permanent account deletion with explicit confirmation
 - Client-side form validation
 - Loading and server-error states
 - Responsive desktop, tablet, and mobile layouts

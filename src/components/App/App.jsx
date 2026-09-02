@@ -5,6 +5,7 @@ import {
   getItems,
   addItem,
   deleteItem,
+  deleteAccount,
   updateUser,
   addCardLike,
   removeCardLike,
@@ -57,12 +58,14 @@ function App() {
   const [profileError, setProfileError] = useState("");
   const [addItemError, setAddItemError] = useState("");
   const [deleteItemError, setDeleteItemError] = useState("");
+  const [accountDeletionError, setAccountDeletionError] = useState("");
 
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const [isAddingItem, setIsAddingItem] = useState(false);
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const [isDeletingItem, setIsDeletingItem] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((currentUnit) =>
@@ -97,6 +100,11 @@ function App() {
     setActiveModal("edit-profile");
   };
 
+  const handleDeleteAccountClick = () => {
+    setAccountDeletionError("");
+    setActiveModal("delete-account");
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
     setCardToDelete(null);
@@ -105,6 +113,7 @@ function App() {
     setProfileError("");
     setAddItemError("");
     setDeleteItemError("");
+    setAccountDeletionError("");
   };
 
   const handleRegistration = ({ name, avatar, email, password }, resetForm) => {
@@ -183,6 +192,41 @@ function App() {
     removeToken();
     setCurrentUser({});
     setIsLoggedIn(false);
+  };
+
+  const handleDeleteAccount = () => {
+    const deletedUserId = currentUser._id;
+
+    setAccountDeletionError("");
+    setIsDeletingAccount(true);
+
+    deleteAccount()
+      .then(() => {
+        setClothingItems((items) =>
+          items
+            .filter((item) => String(item.owner) !== deletedUserId)
+            .map((item) => ({
+              ...item,
+              likes: item.likes.filter(
+                (likeUserId) => String(likeUserId) !== deletedUserId,
+              ),
+            })),
+        );
+
+        removeToken();
+        setCurrentUser({});
+        setIsLoggedIn(false);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error(err);
+        setAccountDeletionError(
+          "Unable to delete your account. Please try again.",
+        );
+      })
+      .finally(() => {
+        setIsDeletingAccount(false);
+      });
   };
 
   const handleUpdateUser = ({ name, avatar }, resetForm) => {
@@ -402,6 +446,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       handleEditProfileClick={handleEditProfileClick}
                       handleSignOut={handleLogout}
+                      handleDeleteAccountClick={handleDeleteAccountClick}
                       isLoggedIn={isLoggedIn}
                     />
                   </ProtectedRoute>
@@ -463,6 +508,20 @@ function App() {
             onConfirm={handleCardDelete}
             isLoading={isDeletingItem}
             serverError={deleteItemError}
+          />
+
+          <DeleteConfirmationModal
+            isOpen={activeModal === "delete-account"}
+            onClose={closeActiveModal}
+            onConfirm={handleDeleteAccount}
+            isLoading={isDeletingAccount}
+            serverError={accountDeletionError}
+            title="Are you sure you want to delete your account?"
+            description={
+              "Your account and all of your garments will be permanently removed."
+            }
+            confirmText="Yes, delete my account"
+            loadingText="Deleting account..."
           />
         </div>
       </CurrentUserContext.Provider>

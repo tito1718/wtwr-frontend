@@ -80,3 +80,21 @@ export const removeCardLike = (id) => {
     },
   }).then(checkResponse);
 };
+
+
+export const deleteAccount = () => {
+  const token = getToken();
+
+  return fetch(`${baseUrl}/users/me`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    if (res.ok) {
+      return null;
+    }
+
+    return Promise.reject(`Error: ${res.status}`);
+  });
+};
